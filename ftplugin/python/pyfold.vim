@@ -12,9 +12,6 @@ let b:loaded_pyfold = 1
 if !exists('g:pyfold_text')
   let g:pyfold_text = 0
 endif
-if !exists('g:pyfold_empty_lines')
-    let g:pyfold_empty_lines = 0
-endif
 if !exists('g:pyfold_braces')
   let g:pyfold_braces = 1
 endif
@@ -89,7 +86,7 @@ function! PythonFoldExpr(lnum)  " {{{2
   " When we are on a blank line
   if text =~# s:empty_line_pattern
     " When the next line has no indent, close foldlevel 1
-    if IndentLevel(a:lnum + 1) == 0 && (!g:pyfold_empty_lines || getline(a:lnum + 1) !~# s:empty_line_pattern)
+    if IndentLevel(a:lnum + 1) == 0 && getline(a:lnum + 1) !~# s:empty_line_pattern
       return '<1'
     " When the next line has indent level 1, close foldlevel 2
     elseif IndentLevel(a:lnum + 1) == 1
